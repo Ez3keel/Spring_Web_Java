@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+//O html precisa estar configurada para conseguir receber código do BackEnd
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 th:text="${Mensagem}">Bem-Vindo à Aula MVC</h1>
+    <p> Está é a página inicial do nosso aplicativo MVC.<p>
+
+    <form action="/produto" method="post">
+        <input type="text" name="nome" placeholder="Digite o nome do produto">
+
+        <button type="submit">Enviar Produto</button>
+    </form>
+</body>
+</html>
