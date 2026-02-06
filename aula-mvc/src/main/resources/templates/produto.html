@@ -117,16 +117,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     <!-- Exemplo de produtos -->
-                                    <tr>
+<!--                                    O each ele vai fazer um for na lista de produtos e vai escrever-->
+<!--                                    para cada item ele vai criar uma var produto e construir a table-->
+                                    <tr th:each="produto : ${produtos}">
                                         <td><span class="badge bg-secondary">P001</span></td>
-                                        <td><strong>iPhone 15 Pro</strong></td>
+                                        <td><strong th:text="${produto.nome}">iPhone 15 Pro</strong></td>
                                         <td>
-                                            <span class="badge bg-info">SMARTPHONE</span>
+                                            <span th:text="${produto.categoria}" class="badge bg-info">SMARTPHONE</span>
                                         </td>
-                                        <td><strong>R$ 7.999,00</strong></td>
+                                        <td><strong th:text="${produto.preco}">R$ 7.999,00</strong></td>
                                         <td>
-                                            <span class="badge border border-primary text-primary bg-transparent">25 unidades</span>
+                                            <span th:text="${produto.estoque}" class="badge border border-primary text-primary bg-transparent">25 unidades</span>
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group btn-group-sm" role="group">
@@ -141,52 +144,8 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="badge bg-secondary">P002</span></td>
-                                        <td><strong>MacBook Pro 14"</strong></td>
-                                        <td>
-                                            <span class="badge bg-info">LAPTOP</span>
-                                        </td>
-                                        <td><strong>R$ 12.999,00</strong></td>
-                                        <td>
-                                            <span class="badge border border-primary text-primary bg-transparent">8 unidades</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="btn-group btn-group-sm" role="group">
-                                                <button type="button" class="btn btn-outline-primary btn-editar-produto" title="Editar"
-                                                    data-id="P002" data-nome="MacBook Pro 14" data-categoria="LAPTOP" data-preco="12999.00" data-estoque="8">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-outline-info btn-excluir-produto" title="Excluir"
-                                                    data-id="P002" data-nome="MacBook Pro 14">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="badge bg-secondary">P003</span></td>
-                                        <td><strong>Mouse Logitech MX Master 3</strong></td>
-                                        <td>
-                                            <span class="badge bg-info">MOUSE</span>
-                                        </td>
-                                        <td><strong>R$ 599,00</strong></td>
-                                        <td>
-                                            <span class="badge border border-primary text-primary bg-transparent">2 unidades</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="btn-group btn-group-sm" role="group">
-                                                <button type="button" class="btn btn-outline-primary btn-editar-produto" title="Editar"
-                                                    data-id="P003" data-nome="Mouse Logitech MX Master 3" data-categoria="MOUSE" data-preco="599.00" data-estoque="2">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-outline-info btn-excluir-produto" title="Excluir"
-                                                    data-id="P003" data-nome="Mouse Logitech MX Master 3">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <!-- Fim da linha-->
+
                                 </tbody>
                             </table>
                         </div>

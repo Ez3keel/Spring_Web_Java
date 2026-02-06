@@ -6,38 +6,39 @@ public class Produto {
     private String categoria;
     private Integer estoque;
 
+
+    //ESTOQUE
     public Integer getEstoque() {
         return estoque;
     }
-
     public void setEstoque(Integer estoque) {
         this.estoque = estoque;
     }
 
+    //CATEGORIA
     public String getCategoria() {
         return categoria;
     }
-
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
+    //PREÇO
     public double getPreco() {
         return preco;
     }
-
     public void setPreco(double preco) {
         this.preco = preco;
     }
 
-    //aqui le o nome
+    //NOME
     public String getNome(){
         return nome;
     }
-    //Escreve
     public void setNome(String nome){
         this.nome = nome;
     }
+
 
     @Override
     public String toString() {
