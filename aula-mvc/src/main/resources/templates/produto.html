@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Produtos - Loja de Eletrônicos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link th:href="@{/produto.css}" href="../static/produto.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container-fluid py-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="h3 mb-0 text-gray-800">
+                            <i class="fas fa-laptop me-2 text-primary"></i>
+                            Gestão de Produtos
+                        </h1>
+                        <p class="text-muted text-primary">Gerencie os produtos eletrônicos da loja</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulário de Cadastro de Produto -->
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <i class="fas fa-plus me-2"></i>Cadastrar Produto
+                    </div>
+                    <div class="card-body">
+
+                        <form id="formCriarProduto" th:action="@{/produto/salvar}" th:object="${produto}" method="post">
+                            <input type="hidden" id="produtoId" name="id">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="produtoNome" class="form-label">Nome do Produto *</label>
+                                        <input type="text" class="form-control" id="produtoNome" th:field="*{nome}" required>
+                                        <div class="form-text">Digite o nome completo do produto</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="produtoCategoria" class="form-label">Categoria *</label>
+                                        <select class="form-select" id="produtoCategoria" th:field="*{categoria}" required>
+                                            <option value="">Selecione uma categoria</option>
+                                            <option value="SMARTPHONE">Smartphone</option>
+                                            <option value="LAPTOP">Laptop</option>
+                                            <option value="DESKTOP">Desktop</option>
+                                            <option value="TABLET">Tablet</option>
+                                            <option value="MOUSE">Mouse</option>
+                                            <option value="TECLADO">Teclado</option>
+                                            <option value="MONITOR">Monitor</option>
+                                            <option value="FONE_DE_OUVIDO">Fone de Ouvido</option>
+                                            <option value="CAIXA_DE_SOM">Caixa de Som</option>
+                                            <option value="WEBCAM">Webcam</option>
+                                            <option value="IMPRESSORA">Impressora</option>
+                                            <option value="ROTEADOR">Roteador</option>
+                                            <option value="HD_EXTERNO">HD Externo</option>
+                                            <option value="PENDRIVE">Pendrive</option>
+                                            <option value="CARREGADOR">Carregador</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="produtoPreco" class="form-label">Preço (R$) *</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">R$</span>
+                                            <input type="number" class="form-control" id="produtoPreco" th:field="*{preco}" step="0.01" min="0" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="produtoEstoque" class="form-label">Quantidade em Estoque *</label>
+                                        <input type="number" class="form-control" id="produtoEstoque" th:field="*{estoque}" min="0" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end gap-2">
+                                <button type="button" class="btn btn-info" onclick="document.getElementById('formCriarProduto').reset();">
+                                    <i class="fas fa-times me-2"></i>Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i>Salvar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela de Produtos -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Preço</th>
+                                        <th scope="col">Estoque</th>
+                                        <th scope="col" class="text-center">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Exemplo de produtos -->
+                                    <tr>
+                                        <td><span class="badge bg-secondary">P001</span></td>
+                                        <td><strong>iPhone 15 Pro</strong></td>
+                                        <td>
+                                            <span class="badge bg-info">SMARTPHONE</span>
+                                        </td>
+                                        <td><strong>R$ 7.999,00</strong></td>
+                                        <td>
+                                            <span class="badge border border-primary text-primary bg-transparent">25 unidades</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="btn-group btn-group-sm" role="group">
+                                                <button type="button" class="btn btn-outline-primary btn-editar-produto" title="Editar"
+                                                    data-id="P001" data-nome="iPhone 15 Pro" data-categoria="SMARTPHONE" data-preco="7999.00" data-estoque="25">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-outline-info btn-excluir-produto" title="Excluir"
+                                                    data-id="P001" data-nome="iPhone 15 Pro">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge bg-secondary">P002</span></td>
+                                        <td><strong>MacBook Pro 14"</strong></td>
+                                        <td>
+                                            <span class="badge bg-info">LAPTOP</span>
+                                        </td>
+                                        <td><strong>R$ 12.999,00</strong></td>
+                                        <td>
+                                            <span class="badge border border-primary text-primary bg-transparent">8 unidades</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="btn-group btn-group-sm" role="group">
+                                                <button type="button" class="btn btn-outline-primary btn-editar-produto" title="Editar"
+                                                    data-id="P002" data-nome="MacBook Pro 14" data-categoria="LAPTOP" data-preco="12999.00" data-estoque="8">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-outline-info btn-excluir-produto" title="Excluir"
+                                                    data-id="P002" data-nome="MacBook Pro 14">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge bg-secondary">P003</span></td>
+                                        <td><strong>Mouse Logitech MX Master 3</strong></td>
+                                        <td>
+                                            <span class="badge bg-info">MOUSE</span>
+                                        </td>
+                                        <td><strong>R$ 599,00</strong></td>
+                                        <td>
+                                            <span class="badge border border-primary text-primary bg-transparent">2 unidades</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="btn-group btn-group-sm" role="group">
+                                                <button type="button" class="btn btn-outline-primary btn-editar-produto" title="Editar"
+                                                    data-id="P003" data-nome="Mouse Logitech MX Master 3" data-categoria="MOUSE" data-preco="599.00" data-estoque="2">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-outline-info btn-excluir-produto" title="Excluir"
+                                                    data-id="P003" data-nome="Mouse Logitech MX Master 3">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Excluir Produto -->
+    <div class="modal fade" id="excluirProdutoModal" tabindex="-1" aria-labelledby="excluirProdutoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="excluirProdutoModalLabel">Confirmar Exclusão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja excluir o produto <strong id="excluirProdutoNome"></strong> (ID: <span id="excluirProdutoId"></span>)?
+                </div>
+                <div class="modal-footer">
+                    <form id="formExcluirProduto" method="post">
+                        <input type="hidden" id="inputExcluirProdutoId" name="id">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

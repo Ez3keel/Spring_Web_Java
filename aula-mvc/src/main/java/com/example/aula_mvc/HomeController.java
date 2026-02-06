@@ -25,11 +25,11 @@ public class HomeController {
         */
         model.addAttribute("Mensagem", "Bem-vindo com mensagem do Backend!");
         model.addAttribute("produto", produto);
-        return "index";
+        return "produto";
     }
     //-----------------------------------------------------------------------------
     //O valor que vier da requisição HTTP será capturado e guardado dentro da variável nome.
-    @PostMapping("/produto")
+    @PostMapping("/produto/salvar")
     public String produto(@ModelAttribute Produto paramsProduto){
         System.out.println("Produto cadastrado: " + paramsProduto);
         this.produto = paramsProduto;
