@@ -3,11 +3,15 @@ package com.example.aula_mvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
+
+    private Produto produto = new Produto();
+
     /*
     -----------------------------------------------------------------------------
     Quando acessar essa rota vai chamar o index.html
@@ -20,13 +24,16 @@ public class HomeController {
         Com base no valor de attributeName ele vai encontrar no index.html e injetar
         */
         model.addAttribute("Mensagem", "Bem-vindo com mensagem do Backend!");
+        model.addAttribute("produto", produto);
         return "index";
     }
     //-----------------------------------------------------------------------------
     //O valor que vier da requisição HTTP será capturado e guardado dentro da variável nome.
     @PostMapping("/produto")
-    public String produto(@RequestParam String nome){
-        System.out.println("Produto cadastrado: " + nome);
-        return "index";
+    public String produto(@ModelAttribute Produto paramsProduto){
+        System.out.println("Produto cadastrado: " + paramsProduto);
+        this.produto = paramsProduto;
+        //Redireciona após o post para ir para o metodo acima get
+        return "redirect:/";
     }
 }

@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1 th:text="${Mensagem}">Bem-Vindo à Aula MVC</h1>
-    <p> Está é a página inicial do nosso aplicativo MVC.<p>
+    <p th:text="${produto.nome}"> Está é a página inicial do nosso aplicativo MVC.<p>
 
-    <form action="/produto" method="post">
-        <input type="text" name="nome" placeholder="Digite o nome do produto">
+    <form action="/produto" method="post" th:object="${produto}">
+        <input type="text" th:field="*{nome}" placeholder="Digite o nome do produto"> <br>
+        <input type="text" th:field="*{preco}" placeholder="0"> <br>
 
         <button type="submit">Enviar Produto</button>
     </form>
