@@ -2,10 +2,7 @@ package com.example.aula_mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -27,7 +24,7 @@ public class HomeController {
         Com base no valor de attributeName ele vai encontrar no index.html e injetar
         */
         model.addAttribute("Mensagem", "Bem-vindo com mensagem do Backend!");
-        model.addAttribute("produto", new Produto());
+        model.addAttribute("produto", new Produto(produtos.size() + 1)); //seta o id de acordo com o tamanho da lista
         model.addAttribute("produtos", produtos);
         return "produto";
     }
@@ -37,7 +34,29 @@ public class HomeController {
     public String produto(@ModelAttribute Produto paramsProduto){
         System.out.println("Produto cadastrado: " + paramsProduto);
         produtos.add(paramsProduto);
-        //Redireciona após o post para ir para o metodo acima get
-        return "redirect:/";
+        return "redirect:/";//Redireciona após o post para ir para o metodo acima get
     }
+
+    @GetMapping("/produto/editar/{id}")
+    public String editar(@PathVariable int id, Model model){
+
+        //Itera na lista procurando o ID para editar
+        Produto produtoParaEditar = produtos.stream()
+                        .filter( p -> p.getId() == id)
+                        .findFirst()
+                        .orElse(null);
+
+        model.addAttribute("produto", produtoParaEditar); //seta o id de acordo com o tamanho da lista
+        model.addAttribute("produtos", produtos);
+        return "produto";
+    }
+
+//    @DeleteMapping("/produto/delete/{id}")
+//    public String deletar(@PathVariable int id, Model model){
+//
+//        boolean produtoParaDeletar = produtos.removeIf(p -> p.getId(id));
+//
+//    }
+
+
 }

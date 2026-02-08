@@ -1,17 +1,24 @@
 package com.example.aula_mvc;
 
 public class Produto {
+    private Integer id;
     private String nome;
     private double preco;
     private String categoria;
-    private Integer estoque;
+    private int estoque;
 
+    //ID
+    //Constructor que já seta o ID quando for criado o inst do obj
+    //Assim ele vai pedir como argumento o valor do ID
+    public Produto(Integer id) {this.id = id; }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
     //ESTOQUE
-    public Integer getEstoque() {
+    public int getEstoque() {
         return estoque;
     }
-    public void setEstoque(Integer estoque) {
+    public void setEstoque(int estoque) {
         this.estoque = estoque;
     }
 
@@ -39,11 +46,11 @@ public class Produto {
         this.nome = nome;
     }
 
-
     @Override
     public String toString() {
         return "Produto{" +
-                "nome='" + nome + '\'' +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
                 ", preco=" + preco +
                 ", categoria='" + categoria + '\'' +
                 ", estoque=" + estoque +
