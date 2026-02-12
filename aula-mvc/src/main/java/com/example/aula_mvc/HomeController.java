@@ -33,6 +33,18 @@ public class HomeController {
     @PostMapping("/produto/salvar")
     public String produto(@ModelAttribute Produto paramsProduto){
         System.out.println("Produto cadastrado: " + paramsProduto);
+
+//Produra no array e filtra se tem algum com o mesmo ID e remove
+        Produto produtoParaEditar = produtos.stream()
+                .filter( p -> p.getId() == paramsProduto.getId())
+                .findFirst()
+                .orElse(null);
+
+        //Caso tenha no array o mesmo id ele vai encontrar e remover
+        if(produtoParaEditar != null){
+            produtos.removeIf(p -> p.getId() == paramsProduto.getId());
+        }
+        //depois vai adicionar o produto novamente no array.
         produtos.add(paramsProduto);
         return "redirect:/";//Redireciona após o post para ir para o metodo acima get
     }
@@ -51,12 +63,13 @@ public class HomeController {
         return "produto";
     }
 
-//    @DeleteMapping("/produto/delete/{id}")
-//    public String deletar(@PathVariable int id, Model model){
-//
-//        boolean produtoParaDeletar = produtos.removeIf(p -> p.getId(id));
-//
-//    }
+    @PostMapping("/produto/excluir")
+    public String produto(@RequestParam int id){
+        System.out.println("Produto excluido: " + id);
+        produtos.removeIf(p-> p.getId() == id);
+        return "redirect /";
+
+    }
 
 
 }

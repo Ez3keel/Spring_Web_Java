@@ -170,7 +170,7 @@
                     Tem certeza que deseja excluir o produto <strong id="excluirProdutoNome"></strong> (ID: <span id="excluirProdutoId"></span>)?
                 </div>
                 <div class="modal-footer">
-                    <form id="formExcluirProduto" method="post">
+                    <form id="formExcluirProduto" th:action="@{/produto/excluir}" method="post" >
                         <input type="hidden" id="inputExcluirProdutoId" name="id">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-danger">Excluir</button>
