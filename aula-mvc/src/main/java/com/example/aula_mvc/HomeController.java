@@ -67,7 +67,7 @@ public class HomeController {
     public String produto(@RequestParam int id){
         System.out.println("Produto excluido: " + id);
         produtos.removeIf(p-> p.getId() == id);
-        return "redirect /";
+        return "redirect:/";
 
     }
 

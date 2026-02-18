@@ -37,7 +37,7 @@
                         <form id="formCriarProduto" th:action="@{/produto/salvar}" th:object="${produto}" method="post">
                             <input type="hidden" class="form-control" id="produtoId" th:field="*{id}" required>
 
-                            <input type="hidden" id="produtoId" name="id">
+<!--                            <input type="hidden" id="produtoId" name="id">-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
@@ -140,10 +140,13 @@
                                                         data-id="P001" data-nome="iPhone 15 Pro" data-categoria="SMARTPHONE" data-preco="7999.00" data-estoque="25">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <button type="button" class="btn btn-outline-info btn-excluir-produto" title="Excluir"
-                                                    data-id="P001" data-nome="iPhone 15 Pro">
+                                                <button type="button"
+                                                        class="btn btn-outline-info btn-excluir-produto"
+                                                        th:data-id="${produto.id}"
+                                                        th:data-nome="${produto.nome}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
+
                                             </div>
                                         </td>
                                     </tr>
@@ -170,7 +173,7 @@
                     Tem certeza que deseja excluir o produto <strong id="excluirProdutoNome"></strong> (ID: <span id="excluirProdutoId"></span>)?
                 </div>
                 <div class="modal-footer">
-                    <form id="formExcluirProduto" th:action="@{/produto/excluir}" method="post" >
+                    <form id="formExcluirProduto" action="/produto/excluir" method="post" >
                         <input type="hidden" id="inputExcluirProdutoId" name="id">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-danger">Excluir</button>
@@ -181,5 +184,27 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+        const excluirModal = new bootstrap.Modal(document.getElementById('excluirProdutoModal'));
+        var excluirProdutoNome = document.getElementById("excluirProdutoNome");
+        var excluirProdutoId = document.getElementById('excluirProdutoId');
+        var inputExcluirProdutoId = document.getElementById("inputExcluirProdutoId");
+
+        document.querySelectorAll('.btn-excluir-produto').forEach(function(button) {
+            button.addEventListener('click', function(){
+                var id = this.getAttribute('data-id');
+                var nome = this.getAttribute("data-nome");
+                excluirProdutoNome.textContent = nome;
+                excluirProdutoId.textContent = id;
+                inputExcluirProdutoId.value = id;
+                excluirModal.show();
+            })
+        });
+    });
+    </script>
+
 </body>
 </html>
